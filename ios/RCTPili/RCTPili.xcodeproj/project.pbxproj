@@ -1,0 +1,435 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		B6803DE21CE47D8600189A83 /* RCTPili-Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B6803DE51CE47D8600189A83 /* Build configuration list for PBXAggregateTarget "RCTPili-Universal" */;
+			buildPhases = (
+				B6803DE61CE47D8A00189A83 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "RCTPili-Universal";
+			productName = "RCTPili-Universal";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		780D28D11CE41980004A07DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28D01CE41980004A07DE /* CoreGraphics.framework */; };
+		780D28D31CE4198F004A07DE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28D21CE4198F004A07DE /* MediaPlayer.framework */; };
+		780D28D51CE41998004A07DE /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28D41CE41998004A07DE /* CoreAudio.framework */; };
+		780D28D71CE4199F004A07DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28D61CE4199F004A07DE /* AudioToolbox.framework */; };
+		780D28D91CE419A9004A07DE /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28D81CE419A9004A07DE /* Accelerate.framework */; };
+		780D28DB1CE419B5004A07DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28DA1CE419B5004A07DE /* QuartzCore.framework */; };
+		780D28DD1CE419BB004A07DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28DC1CE419BB004A07DE /* OpenGLES.framework */; };
+		780D28DF1CE419C4004A07DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28DE1CE419C4004A07DE /* AVFoundation.framework */; };
+		780D28FC1CE41EB1004A07DE /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28F81CE41E4A004A07DE /* libz.1.dylib */; };
+		780D28FD1CE41EC6004A07DE /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D28FA1CE41E68004A07DE /* libc++.1.dylib */; };
+		780D29131CE450FD004A07DE /* libcommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D29101CE450FD004A07DE /* libcommon.a */; };
+		780D29141CE450FD004A07DE /* libdecoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D29111CE450FD004A07DE /* libdecoder.a */; };
+		780D29151CE450FD004A07DE /* libPLPlayerKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 780D29121CE450FD004A07DE /* libPLPlayerKit.a */; };
+		780D29181CE45204004A07DE /* RCTPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 780D29171CE45204004A07DE /* RCTPlayerManager.m */; };
+		781A256D1CE4546700C9FCF5 /* RCTPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 781A256C1CE4546700C9FCF5 /* RCTPlayer.m */; };
+		783631EF1CE3408300628658 /* RCTPili.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 783631EE1CE3408300628658 /* RCTPili.h */; };
+		783631F11CE3408300628658 /* RCTPili.m in Sources */ = {isa = PBXBuildFile; fileRef = 783631F01CE3408300628658 /* RCTPili.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		783631E91CE3408300628658 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				783631EF1CE3408300628658 /* RCTPili.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		780D28D01CE41980004A07DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		780D28D21CE4198F004A07DE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		780D28D41CE41998004A07DE /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		780D28D61CE4199F004A07DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		780D28D81CE419A9004A07DE /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		780D28DA1CE419B5004A07DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		780D28DC1CE419BB004A07DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		780D28DE1CE419C4004A07DE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		780D28F81CE41E4A004A07DE /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = /usr/lib/libz.1.dylib; sourceTree = "<absolute>"; };
+		780D28FA1CE41E68004A07DE /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "/usr/lib/libc++.1.dylib"; sourceTree = "<absolute>"; };
+		780D290B1CE450FD004A07DE /* PLPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayer.h; sourceTree = "<group>"; };
+		780D290C1CE450FD004A07DE /* PLPlayerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerError.h; sourceTree = "<group>"; };
+		780D290D1CE450FD004A07DE /* PLPlayerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerKit.h; sourceTree = "<group>"; };
+		780D290E1CE450FD004A07DE /* PLPlayerOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerOption.h; sourceTree = "<group>"; };
+		780D29101CE450FD004A07DE /* libcommon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcommon.a; sourceTree = "<group>"; };
+		780D29111CE450FD004A07DE /* libdecoder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdecoder.a; sourceTree = "<group>"; };
+		780D29121CE450FD004A07DE /* libPLPlayerKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPLPlayerKit.a; sourceTree = "<group>"; };
+		780D29161CE45204004A07DE /* RCTPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTPlayerManager.h; sourceTree = "<group>"; };
+		780D29171CE45204004A07DE /* RCTPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTPlayerManager.m; sourceTree = "<group>"; };
+		781A256B1CE4546700C9FCF5 /* RCTPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTPlayer.h; sourceTree = "<group>"; };
+		781A256C1CE4546700C9FCF5 /* RCTPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTPlayer.m; sourceTree = "<group>"; };
+		783631EB1CE3408300628658 /* libRCTPili.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTPili.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		783631EE1CE3408300628658 /* RCTPili.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTPili.h; sourceTree = "<group>"; };
+		783631F01CE3408300628658 /* RCTPili.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTPili.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		783631E81CE3408300628658 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				780D29141CE450FD004A07DE /* libdecoder.a in Frameworks */,
+				780D29151CE450FD004A07DE /* libPLPlayerKit.a in Frameworks */,
+				780D28FD1CE41EC6004A07DE /* libc++.1.dylib in Frameworks */,
+				780D28FC1CE41EB1004A07DE /* libz.1.dylib in Frameworks */,
+				780D28DF1CE419C4004A07DE /* AVFoundation.framework in Frameworks */,
+				780D28DD1CE419BB004A07DE /* OpenGLES.framework in Frameworks */,
+				780D29131CE450FD004A07DE /* libcommon.a in Frameworks */,
+				780D28DB1CE419B5004A07DE /* QuartzCore.framework in Frameworks */,
+				780D28D91CE419A9004A07DE /* Accelerate.framework in Frameworks */,
+				780D28D71CE4199F004A07DE /* AudioToolbox.framework in Frameworks */,
+				780D28D51CE41998004A07DE /* CoreAudio.framework in Frameworks */,
+				780D28D31CE4198F004A07DE /* MediaPlayer.framework in Frameworks */,
+				780D28D11CE41980004A07DE /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		780D28F71CE41CB1004A07DE /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				780D28FA1CE41E68004A07DE /* libc++.1.dylib */,
+				780D28F81CE41E4A004A07DE /* libz.1.dylib */,
+				780D28DE1CE419C4004A07DE /* AVFoundation.framework */,
+				780D28DC1CE419BB004A07DE /* OpenGLES.framework */,
+				780D28DA1CE419B5004A07DE /* QuartzCore.framework */,
+				780D28D81CE419A9004A07DE /* Accelerate.framework */,
+				780D28D61CE4199F004A07DE /* AudioToolbox.framework */,
+				780D28D41CE41998004A07DE /* CoreAudio.framework */,
+				780D28D21CE4198F004A07DE /* MediaPlayer.framework */,
+				780D28D01CE41980004A07DE /* CoreGraphics.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		780D29081CE450FD004A07DE /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				780D29091CE450FD004A07DE /* include */,
+				780D290F1CE450FD004A07DE /* lib */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		780D29091CE450FD004A07DE /* include */ = {
+			isa = PBXGroup;
+			children = (
+				780D290A1CE450FD004A07DE /* PLPlayerKit */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		780D290A1CE450FD004A07DE /* PLPlayerKit */ = {
+			isa = PBXGroup;
+			children = (
+				780D290B1CE450FD004A07DE /* PLPlayer.h */,
+				780D290C1CE450FD004A07DE /* PLPlayerError.h */,
+				780D290D1CE450FD004A07DE /* PLPlayerKit.h */,
+				780D290E1CE450FD004A07DE /* PLPlayerOption.h */,
+			);
+			path = PLPlayerKit;
+			sourceTree = "<group>";
+		};
+		780D290F1CE450FD004A07DE /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				780D29101CE450FD004A07DE /* libcommon.a */,
+				780D29111CE450FD004A07DE /* libdecoder.a */,
+				780D29121CE450FD004A07DE /* libPLPlayerKit.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		783631E21CE3408300628658 = {
+			isa = PBXGroup;
+			children = (
+				780D29081CE450FD004A07DE /* Library */,
+				780D28F71CE41CB1004A07DE /* Libraries */,
+				783631ED1CE3408300628658 /* RCTPili */,
+				783631EC1CE3408300628658 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		783631EC1CE3408300628658 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				783631EB1CE3408300628658 /* libRCTPili.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		783631ED1CE3408300628658 /* RCTPili */ = {
+			isa = PBXGroup;
+			children = (
+				783631EE1CE3408300628658 /* RCTPili.h */,
+				783631F01CE3408300628658 /* RCTPili.m */,
+				780D29161CE45204004A07DE /* RCTPlayerManager.h */,
+				780D29171CE45204004A07DE /* RCTPlayerManager.m */,
+				781A256B1CE4546700C9FCF5 /* RCTPlayer.h */,
+				781A256C1CE4546700C9FCF5 /* RCTPlayer.m */,
+			);
+			path = RCTPili;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		783631EA1CE3408300628658 /* RCTPili */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 783631F41CE3408300628658 /* Build configuration list for PBXNativeTarget "RCTPili" */;
+			buildPhases = (
+				783631E71CE3408300628658 /* Sources */,
+				783631E81CE3408300628658 /* Frameworks */,
+				783631E91CE3408300628658 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCTPili;
+			productName = RCTPili;
+			productReference = 783631EB1CE3408300628658 /* libRCTPili.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		783631E31CE3408300628658 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = pili;
+				TargetAttributes = {
+					783631EA1CE3408300628658 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					B6803DE21CE47D8600189A83 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 783631E61CE3408300628658 /* Build configuration list for PBXProject "RCTPili" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 783631E21CE3408300628658;
+			productRefGroup = 783631EC1CE3408300628658 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B6803DE21CE47D8600189A83 /* RCTPili-Universal */,
+				783631EA1CE3408300628658 /* RCTPili */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B6803DE61CE47D8A00189A83 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target ${PROJECT_NAME} -configuration ${CONFIGURATION} -sdk iphoneos ARCHS='armv7 armv7s arm64' VALID_ARCHS='armv7 armv7s arm64' BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target ${PROJECT_NAME} -configuration ${CONFIGURATION} -sdk iphonesimulator ARCHS='i386 x86_64' VALID_ARCHS='i386 x86_64' BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include\" \"${UNIVERSAL_OUTPUTFOLDER}/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		783631E71CE3408300628658 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				780D29181CE45204004A07DE /* RCTPlayerManager.m in Sources */,
+				783631F11CE3408300628658 /* RCTPili.m in Sources */,
+				781A256D1CE4546700C9FCF5 /* RCTPlayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		783631F21CE3408300628658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		783631F31CE3408300628658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		783631F51CE3408300628658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../../node_modules/react-native/React/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/lib",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		783631F61CE3408300628658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../../node_modules/react-native/React/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/lib",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B6803DE31CE47D8600189A83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B6803DE41CE47D8600189A83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		783631E61CE3408300628658 /* Build configuration list for PBXProject "RCTPili" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				783631F21CE3408300628658 /* Debug */,
+				783631F31CE3408300628658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		783631F41CE3408300628658 /* Build configuration list for PBXNativeTarget "RCTPili" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				783631F51CE3408300628658 /* Debug */,
+				783631F61CE3408300628658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6803DE51CE47D8600189A83 /* Build configuration list for PBXAggregateTarget "RCTPili-Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6803DE31CE47D8600189A83 /* Debug */,
+				B6803DE41CE47D8600189A83 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 783631E31CE3408300628658 /* Project object */;
+}

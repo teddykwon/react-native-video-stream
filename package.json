@@ -1,0 +1,30 @@
+{
+  "name": "react-native-video-stream",
+  "version": "0.0.1",
+  "description": "react-native-pili based video stream library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KwonOhBin/react-native-video-stream.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-video",
+    "react-native-pili",
+    "react-native-stream"
+  ],
+  "author": "KwonOhBin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KwonOhBin/react-native-video-stream/issues"
+  },
+  "homepage": "https://github.com/KwonOhBin/react-native-video-stream#readme",
+  "devDependencies": {
+    "react": "^15.3.0",
+    "react-native": "^0.30.0"
+  }
+}
