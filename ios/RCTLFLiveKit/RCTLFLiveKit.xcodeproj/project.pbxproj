@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		95696EFB1D59C69700FF600F /* RCTStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95696EFA1D59C69700FF600F /* RCTStreamManager.m */; };
+		95696F131D59DDA000FF600F /* LFLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95696F121D59DD8F00FF600F /* LFLiveKit.framework */; };
+		95696F2A1D5AB94000FF600F /* RCTStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 95696F291D5AB94000FF600F /* RCTStream.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		95696F111D59DD8F00FF600F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95696F0D1D59DD8F00FF600F /* LFLiveKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 84001F8A1D0015D10026C63F;
+			remoteInfo = LFLiveKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		95696ED51D59C63D00FF600F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		95696ED71D59C63D00FF600F /* libRCTLFLiveKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTLFLiveKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		95696EF91D59C68B00FF600F /* RCTStreamManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTStreamManager.h; sourceTree = "<group>"; };
+		95696EFA1D59C69700FF600F /* RCTStreamManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTStreamManager.m; sourceTree = "<group>"; };
+		95696F0D1D59DD8F00FF600F /* LFLiveKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LFLiveKit.xcodeproj; sourceTree = SOURCE_ROOT; };
+		95696F281D5AB93500FF600F /* RCTStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTStream.h; sourceTree = "<group>"; };
+		95696F291D5AB94000FF600F /* RCTStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTStream.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		95696ED41D59C63D00FF600F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95696F131D59DDA000FF600F /* LFLiveKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		95696ECE1D59C63D00FF600F = {
+			isa = PBXGroup;
+			children = (
+				95696ED91D59C63D00FF600F /* RCTLFLiveKit */,
+				95696ED81D59C63D00FF600F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		95696ED81D59C63D00FF600F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95696ED71D59C63D00FF600F /* libRCTLFLiveKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		95696ED91D59C63D00FF600F /* RCTLFLiveKit */ = {
+			isa = PBXGroup;
+			children = (
+				95696F0D1D59DD8F00FF600F /* LFLiveKit.xcodeproj */,
+				95696EF91D59C68B00FF600F /* RCTStreamManager.h */,
+				95696EFA1D59C69700FF600F /* RCTStreamManager.m */,
+				95696F281D5AB93500FF600F /* RCTStream.h */,
+				95696F291D5AB94000FF600F /* RCTStream.m */,
+			);
+			path = RCTLFLiveKit;
+			sourceTree = "<group>";
+		};
+		95696F0E1D59DD8F00FF600F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95696F121D59DD8F00FF600F /* LFLiveKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		95696ED61D59C63D00FF600F /* RCTLFLiveKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95696EE01D59C63D00FF600F /* Build configuration list for PBXNativeTarget "RCTLFLiveKit" */;
+			buildPhases = (
+				95696ED31D59C63D00FF600F /* Sources */,
+				95696ED41D59C63D00FF600F /* Frameworks */,
+				95696ED51D59C63D00FF600F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCTLFLiveKit;
+			productName = RCTLFLiveKit;
+			productReference = 95696ED71D59C63D00FF600F /* libRCTLFLiveKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		95696ECF1D59C63D00FF600F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "권오빈";
+				TargetAttributes = {
+					95696ED61D59C63D00FF600F = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 95696ED21D59C63D00FF600F /* Build configuration list for PBXProject "RCTLFLiveKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 95696ECE1D59C63D00FF600F;
+			productRefGroup = 95696ED81D59C63D00FF600F /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 95696F0E1D59DD8F00FF600F /* Products */;
+					ProjectRef = 95696F0D1D59DD8F00FF600F /* LFLiveKit.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				95696ED61D59C63D00FF600F /* RCTLFLiveKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		95696F121D59DD8F00FF600F /* LFLiveKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LFLiveKit.framework;
+			remoteRef = 95696F111D59DD8F00FF600F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		95696ED31D59C63D00FF600F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95696F2A1D5AB94000FF600F /* RCTStream.m in Sources */,
+				95696EFB1D59C69700FF600F /* RCTStreamManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		95696EDE1D59C63D00FF600F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		95696EDF1D59C63D00FF600F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		95696EE11D59C63D00FF600F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../node_modules/react-native/React/**",
+					"$(SRCROOT)/LFLiveKit/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		95696EE21D59C63D00FF600F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../node_modules/react-native/React/**",
+					"$(SRCROOT)/LFLiveKit/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		95696ED21D59C63D00FF600F /* Build configuration list for PBXProject "RCTLFLiveKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95696EDE1D59C63D00FF600F /* Debug */,
+				95696EDF1D59C63D00FF600F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95696EE01D59C63D00FF600F /* Build configuration list for PBXNativeTarget "RCTLFLiveKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95696EE11D59C63D00FF600F /* Debug */,
+				95696EE21D59C63D00FF600F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 95696ECF1D59C63D00FF600F /* Project object */;
+}
