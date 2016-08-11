@@ -4,6 +4,7 @@
 
 # Info
 This library based [react-native-pili](https://github.com/buhe/react-native-pili)
+Add Stream based [LFLiveKit](https://github.com/LaiFengiOS/LFLiveKit/issues)
 
 # License
 MIT
