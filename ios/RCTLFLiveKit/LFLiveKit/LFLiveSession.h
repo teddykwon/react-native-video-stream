@@ -15,6 +15,26 @@
 #import "LFLiveVideoConfiguration.h"
 #import "LFLiveDebug.h"
 
+typedef NS_ENUM(NSInteger,LFLiveCaptureType) {
+    LFLiveCaptureAudio,         //< capture only audio
+    LFLiveCaptureVideo,         //< capture onlt video
+    LFLiveInputAudio,           //< only audio (External input audio)
+    LFLiveInputVideo,           //< only video (External input video)
+};
+
+
+///< 用来控制采集类型（可以内部采集也可以外部传入等各种组合，支持单音频与单视频,外部输入适用于录屏，无人机等外设介入）
+typedef NS_ENUM(NSInteger,LFLiveCaptureTypeMask) {
+    LFLiveCaptureMaskAudio = (1 << LFLiveCaptureAudio),                                 ///< only inner capture audio (no video)
+    LFLiveCaptureMaskVideo = (1 << LFLiveCaptureVideo),                                 ///< only inner capture video (no audio)
+    LFLiveInputMaskAudio = (1 << LFLiveInputAudio),                                     ///< only outer input audio (no video)
+    LFLiveInputMaskVideo = (1 << LFLiveInputVideo),                                     ///< only outer input video (no audio)
+    LFLiveCaptureMaskAll = (LFLiveCaptureMaskAudio | LFLiveCaptureMaskVideo),           ///< inner capture audio and video
+    LFLiveInputMaskAll = (LFLiveInputMaskAudio | LFLiveInputMaskVideo),                 ///< outer input audio and video(method see pushVideo and pushAudio)
+    LFLiveCaptureMaskAudioInputVideo = (LFLiveCaptureMaskAudio | LFLiveInputMaskVideo), ///< inner capture audio and outer input video(method pushVideo and setRunning)
+    LFLiveCaptureMaskVideoInputAudio = (LFLiveCaptureMaskVideo | LFLiveInputMaskAudio), ///< inner capture video and outer input audio(method pushAudio and setRunning)
+    LFLiveCaptureDefaultMask = LFLiveCaptureMaskAll                                     ///< default is inner capture audio and video
+};
 
 @class LFLiveSession;
 @protocol LFLiveSessionDelegate <NSObject>
@@ -51,10 +71,10 @@
 /** The beautyFace control capture shader filter empty or beautiy */
 @property (nonatomic, assign) BOOL beautyFace;
 
-/** The beautyLevel control beautyFace Level, default 0.5, between 0.0 ~ 1.0 */
+/** The beautyLevel control beautyFace Level. Default is 0.5, between 0.0 ~ 1.0 */
 @property (nonatomic, assign) CGFloat beautyLevel;
 
-/** The brightLevel control brightness Level, default 0.5, between 0.0 ~ 1.0 */
+/** The brightLevel control brightness Level, Default is 0.5, between 0.0 ~ 1.0 */
 @property (nonatomic, assign) CGFloat brightLevel;
 
 /** The torch control camera zoom scale default 1.0, between 1.0 ~ 3.0 */
@@ -69,13 +89,17 @@
 /** The muted control callbackAudioData,muted will memset 0.*/
 @property (nonatomic, assign) BOOL muted;
 
-@property (nonatomic, assign) BOOL preset;
+/*  The adaptiveBitrate control auto adjust bitrate. Default is NO */
+@property (nonatomic, assign) BOOL adaptiveBitrate;
 
 /** The stream control upload and package*/
 @property (nullable, nonatomic, strong, readonly) LFLiveStreamInfo *streamInfo;
 
 /** The status of the stream .*/
 @property (nonatomic, assign, readonly) LFLiveState state;
+
+/** The captureType control inner or outer audio and video .*/
+@property (nonatomic, assign, readonly) LFLiveCaptureTypeMask captureType;
 
 /** The showDebugInfo control streamInfo and uploadInfo(1s) *.*/
 @property (nonatomic, assign) BOOL showDebugInfo;
@@ -104,12 +128,23 @@
  */
 - (nullable instancetype)initWithAudioConfiguration:(nullable LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(nullable LFLiveVideoConfiguration *)videoConfiguration NS_DESIGNATED_INITIALIZER;
 
+/**
+ The designated initializer. Multiple instances with the same configuration will make the
+ capture unstable.
+ */
+- (nullable instancetype)initWithAudioConfiguration:(nullable LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(nullable LFLiveVideoConfiguration *)videoConfiguration captureType:(LFLiveCaptureTypeMask)captureType NS_DESIGNATED_INITIALIZER;
+
 /** The start stream .*/
 - (void)startLive:(nonnull LFLiveStreamInfo *)streamInfo;
 
 /** The stop stream .*/
 - (void)stopLive;
 
+/** support outer input yuv or rgb video(set LFLiveCaptureTypeMask) .*/
+- (void)pushVideo:(CVPixelBufferRef)pixelBuffer;
+
+/** support outer input pcm audio(set LFLiveCaptureTypeMask) .*/
+- (void)pushAudio:(AudioBufferList)audioBufferList;
 
 @end
 

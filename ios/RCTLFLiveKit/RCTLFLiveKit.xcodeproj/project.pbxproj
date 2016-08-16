@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		95696EFB1D59C69700FF600F /* RCTStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95696EFA1D59C69700FF600F /* RCTStreamManager.m */; };
-		95696F131D59DDA000FF600F /* LFLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95696F121D59DD8F00FF600F /* LFLiveKit.framework */; };
 		95696F2A1D5AB94000FF600F /* RCTStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 95696F291D5AB94000FF600F /* RCTStream.m */; };
+		956974E61D5DCE3C00FF600F /* LFLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95696F121D59DD8F00FF600F /* LFLiveKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95696F131D59DDA000FF600F /* LFLiveKit.framework in Frameworks */,
+				956974E61D5DCE3C00FF600F /* LFLiveKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

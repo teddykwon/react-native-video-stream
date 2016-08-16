@@ -7,7 +7,8 @@
 //
 
 #import "RCTBridge.h"
-#import <LFLiveKit/LFLiveSession.h>
+#import "LFLiveSession.h"
+//#import <LFLiveKit/LFLiveSession.h>
 #import "RCTStream.h"
 #import "RCTStreamManager.h"
 #import "RCTLog.h"
@@ -29,6 +30,31 @@
     bool _started;
     bool _cameraFronted;
     NSString *_url;
+    bool _landscape;
+}
+
+- (void)insertReactSubview:(UIView *)view atIndex:(NSInteger)atIndex
+{
+    [self insertSubview:view atIndex:atIndex + 1];
+    return;
+}
+
+- (void)removeReactSubview:(UIView *)subview
+{
+    [subview removeFromSuperview];
+    return;
+}
+
+- (void)removeFromSuperview
+{
+    __weak typeof(self) _self = self;
+    if(!_started){
+        [_self.session stopLive];
+    }
+    [super removeFromSuperview];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    //[UIApplication sharedApplication].idleTimerDisabled = _previousIdleTimerDisabled;
 }
 
 - (id) initWithManager:(RCTStreamManager *)manager bridge:(RCTBridge *)bridge{
@@ -41,7 +67,18 @@
         [self requestAccessForVideo];
         [self requestAccessForAudio];
         [self addSubview:self.containerView];
-        [self.containerView addSubview:self.startLiveButton];
+//
+//        [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        
+//        NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+//        NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+//        NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+//        NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
+//        
+//        NSArray *constraints = [NSArray arrayWithObjects:centerX, centerY,width,height, nil];
+//        [self addConstraints: constraints];
+        
+        //[self.containerView addSubview:self.startLiveButton];
     }
     return self;
 }
@@ -125,14 +162,16 @@
 
 #pragma mark -- Getter Setter
 - (LFLiveSession *)session {
+    NSLog(@"Session 호출");
     if (!_session) {
+        NSLog(@"Session 생성");
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
         
         
         /***   默认分辨率368 ＊ 640  音频：44.1 iphone6以上48  双声道  方向竖屏 ***/
-        _session = [[LFLiveSession alloc] initWithAudioConfiguration:[LFLiveAudioConfiguration defaultConfiguration] videoConfiguration:[LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Low3 landscape:NO]];
+        _session = [[LFLiveSession alloc] initWithAudioConfiguration:[LFLiveAudioConfiguration defaultConfiguration] videoConfiguration:[LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Low3 landscape:_landscape]];
         
         /**    自己定制单声道  */
         /*
@@ -218,9 +257,9 @@
          */
         
         _session.delegate = self;
-        _session.showDebugInfo = NO;
+        _session.showDebugInfo = YES;
         _session.preView = self;
-        _session.mirror = NO;
+        //_session.mirror = NO;
 
         //        UIImageView *imageView = [[UIImageView alloc] init];
         //        imageView.alpha = 0.8;
@@ -234,12 +273,6 @@
 
 - (UIView *)containerView {
     if (!_containerView) {
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(orientationChanged:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
-        
         _containerView = [UIView new];
         _containerView.frame = self.bounds;
         _containerView.backgroundColor = [UIColor clearColor];
@@ -280,22 +313,8 @@
     _url = url;
 }
 
-
-- (void)orientationChanged:(NSNotification *)notification
-{
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-
-    __weak typeof(self) _self = self;
-
-    switch (deviceOrientation) {
-        case 1:
-            _self.session.preset = YES;
-            break;
-            
-        default:
-            _self.session.preset = NO;
-            break;
-    }
+- (void) setLandscape: (BOOL) landscape{
+    _landscape = landscape;
 }
 
 @end

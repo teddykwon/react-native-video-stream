@@ -2,7 +2,7 @@
  * Created by buhe on 16/4/29.
  */
 import React, {PropTypes, Component} from 'react';
-import {requireNativeComponent, NativeModules, View} from 'react-native';
+import {requireNativeComponent, Dimensions, NativeModules, View} from 'react-native';
 //
 // class Stream extends Component {
 // 	static propTypes = {
@@ -17,6 +17,7 @@ import {requireNativeComponent, NativeModules, View} from 'react-native';
 // 		)
 // 	}
 // }
+const { width , height } = Dimensions.get('window');
 
 class Stream extends Component {
 	constructor(props, context){
@@ -32,12 +33,14 @@ class Stream extends Component {
 		started: PropTypes.bool,
 		cameraFronted: PropTypes.bool,
 		url: PropTypes.string.isRequired,
+		landscape: PropTypes.bool.isRequired,
 
 		onReady: PropTypes.func,
 		onPending: PropTypes.func,
 		onStart: PropTypes.func,
 		onError: PropTypes.func,
-		onStop: PropTypes.func
+		onStop: PropTypes.func,
+		...View.propTypes,
 	}
 
 	static defaultProps= {
@@ -65,21 +68,42 @@ class Stream extends Component {
 	}
 
 	render() {
+		let style = this.props.style;
+		if(this.props.style){
+			if(this.props.landscape){
+				style = {
+					...this.props.style,
+					transform:[{rotate:'270deg'}],
+					width:height,
+					height:width
+					// width: height,
+					// height: width,
+					// top:height/3,
+					// left:-1 * (height/3)
+				};
+			}else{
+				style = {
+					width: width,
+					height: height,
+					...this.props.style
+				}
+			}
+		}
 		const nativeProps = {
 			onReady: this._onReady,
 			onPending: this._onPending,
 			onStart: this._onStart,
 			onError: this._onError,
-			onStop: this._onStop
+			onStop: this._onStop,
+			...this.props,
+			style: {
+				...style
+			}
 		};
+
 		return (
 			<RCTStream
 				{...nativeProps}
-				{...this.props}
-				style={{
-					width:300,
-					height:200
-				}}
 			/>
 		)
 	}

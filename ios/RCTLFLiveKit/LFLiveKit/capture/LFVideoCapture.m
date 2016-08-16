@@ -32,7 +32,6 @@
 @synthesize beautyLevel = _beautyLevel;
 @synthesize brightLevel = _brightLevel;
 @synthesize zoomScale = _zoomScale;
-@synthesize preset = _preset;
 
 #pragma mark -- LifeCycle
 - (instancetype)initWithVideoConfiguration:(LFLiveVideoConfiguration *)configuration {
@@ -64,19 +63,19 @@
         _videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:_configuration.avSessionPreset cameraPosition:AVCaptureDevicePositionFront];
         UIInterfaceOrientation statusBar = [[UIApplication sharedApplication] statusBarOrientation];
         if (self.configuration.landscape) {
-            if (statusBar != UIInterfaceOrientationLandscapeLeft && statusBar != UIInterfaceOrientationLandscapeRight) {
-                @throw [NSException exceptionWithName:@"当前设置方向出错" reason:@"LFLiveVideoConfiguration landscape error" userInfo:nil];
+            //if (statusBar != UIInterfaceOrientationLandscapeLeft && statusBar != UIInterfaceOrientationLandscapeRight) {
+                //@throw [NSException exceptionWithName:@"当前设置方向出错" reason:@"LFLiveVideoConfiguration landscape error" userInfo:nil];
                 _videoCamera.outputImageOrientation = UIInterfaceOrientationLandscapeLeft;
-            } else {
-                _videoCamera.outputImageOrientation = statusBar;
-            }
+            //} else {
+            //    _videoCamera.outputImageOrientation = statusBar;
+            //}
         } else {
-            if (statusBar != UIInterfaceOrientationPortrait && statusBar != UIInterfaceOrientationPortraitUpsideDown) {
-                @throw [NSException exceptionWithName:@"当前设置方向出错" reason:@"LFLiveVideoConfiguration landscape error" userInfo:nil];
+            //if (statusBar != UIInterfaceOrientationPortrait && statusBar != UIInterfaceOrientationPortraitUpsideDown) {
+                //@throw [NSException exceptionWithName:@"当前设置方向出错" reason:@"LFLiveVideoConfiguration landscape error" userInfo:nil];
                 _videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
-            } else {
-                _videoCamera.outputImageOrientation = statusBar;
-            }
+            //} else {
+            //    _videoCamera.outputImageOrientation = statusBar;
+            //}
         }
         
         _videoCamera.horizontallyMirrorFrontFacingCamera = YES;
@@ -103,7 +102,12 @@
 - (void)setPreView:(UIView *)preView {
     if (self.gpuImageView.superview) [self.gpuImageView removeFromSuperview];
     [preView insertSubview:self.gpuImageView atIndex:0];
-    self.gpuImageView.frame = CGRectMake(0, 0, preView.frame.size.width, preView.frame.size.height);
+    if (self.configuration.landscape) {
+        self.gpuImageView.frame = CGRectMake(0, 0, preView.frame.size.height, preView.frame.size.width);
+    }else{
+        self.gpuImageView.frame = CGRectMake(0, 0, preView.frame.size.width, preView.frame.size.height);
+    }
+    
 }
 
 - (UIView *)preView {
@@ -159,7 +163,6 @@
 
 - (void)setMirror:(BOOL)mirror {
     _mirror = mirror;
-    self.videoCamera.horizontallyMirrorRearFacingCamera = mirror;
     self.videoCamera.horizontallyMirrorFrontFacingCamera = mirror;
 }
 
@@ -205,22 +208,6 @@
     return _zoomScale;
 }
 
-- (BOOL) preset {
-    return _preset;
-}
-
-- (void) setPreset:(BOOL)preset{
-    self.configuration.landscape = preset;
-
-    if(preset){
-        self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
-    }else{
-        self.videoCamera.outputImageOrientation = UIInterfaceOrientationLandscapeRight;
-    }
-
-    _preset = preset;
-}
-
 - (void)setWarterMarkView:(UIView *)warterMarkView{
     if(_warterMarkView && _warterMarkView.superview){
         [_warterMarkView removeFromSuperview];
@@ -251,7 +238,7 @@
 - (UIView *)waterMarkContentView{
     if(!_waterMarkContentView){
         _waterMarkContentView = [UIView new];
-        _waterMarkContentView.frame = CGRectMake(0, 0, self.gpuImageView.frame.size.width, self.gpuImageView.frame.size.height);
+        _waterMarkContentView.frame = CGRectMake(0, 0, self.configuration.videoSize.width, self.configuration.videoSize.height);
         _waterMarkContentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     return _waterMarkContentView;
@@ -272,14 +259,6 @@
     @autoreleasepool {
         GPUImageFramebuffer *imageFramebuffer = output.framebufferForOutput;
         CVPixelBufferRef pixelBuffer = [imageFramebuffer pixelBuffer];
-        if(!CGSizeEqualToSize(_self.configuration.videoSize, imageFramebuffer.size)){
-            NSInteger width = ceil(imageFramebuffer.size.width);
-            NSInteger height = ceil(imageFramebuffer.size.height);
-            if(width %2 != 0) width = width + 1;
-            if(height %2 != 0) height = height + 1;
-            _self.configuration.videoSize = CGSizeMake(width, height);
-            _self.waterMarkContentView.frame = CGRectMake(0, 0,_self.configuration.videoSize.width, _self.configuration.videoSize.height);
-        }
         if (pixelBuffer && _self.delegate && [_self.delegate respondsToSelector:@selector(captureOutput:pixelBuffer:)]) {
             [_self.delegate captureOutput:_self pixelBuffer:pixelBuffer];
         }
@@ -327,19 +306,11 @@
         [self.output addTarget:self.gpuImageView];
     }
     
-    //< 输出大小自适应
-    if(self.configuration.videoSizeRespectingAspectRatio){
-        [self.filter forceProcessingAtSizeRespectingAspectRatio:self.configuration.videoSize];
-        [self.output forceProcessingAtSizeRespectingAspectRatio:self.configuration.videoSize];
-        [self.blendFilter forceProcessingAtSizeRespectingAspectRatio:self.configuration.videoSize];
-        [self.uiElementInput forceProcessingAtSizeRespectingAspectRatio:self.configuration.videoSize];
-    }else{
-        [self.filter forceProcessingAtSize:self.configuration.videoSize];
-        [self.output forceProcessingAtSize:self.configuration.videoSize];
-        [self.blendFilter forceProcessingAtSize:self.configuration.videoSize];
-        [self.uiElementInput forceProcessingAtSize:self.configuration.videoSize];
-    }
-    
+    [self.filter forceProcessingAtSize:self.configuration.videoSize];
+    [self.output forceProcessingAtSize:self.configuration.videoSize];
+    [self.blendFilter forceProcessingAtSize:self.configuration.videoSize];
+    [self.uiElementInput forceProcessingAtSize:self.configuration.videoSize];
+
     //< 输出数据
     __weak typeof(self) _self = self;
     [self.output setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
@@ -374,11 +345,9 @@
         }
     } else {
         if (statusBar == UIInterfaceOrientationPortrait) {
-            self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
-            
-        } else if (statusBar == UIInterfaceOrientationPortraitUpsideDown) {
             self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortraitUpsideDown;
-            //self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+        } else if (statusBar == UIInterfaceOrientationPortraitUpsideDown) {
+            self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
         }
     }
 }

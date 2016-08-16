@@ -11,20 +11,18 @@
 #import "LFAudioCapture.h"
 #import "LFHardwareVideoEncoder.h"
 #import "LFHardwareAudioEncoder.h"
+#import "LFH264VideoEncoder.h"
 #import "LFStreamRTMPSocket.h"
 #import "LFLiveStreamInfo.h"
 #import "LFGPUImageBeautyFilter.h"
 #import "LFH264VideoEncoder.h"
 
-#define LFLiveReportKey @"com.youku.liveSessionReport"
 
 @interface LFLiveSession ()<LFAudioCaptureDelegate, LFVideoCaptureDelegate, LFAudioEncodingDelegate, LFVideoEncodingDelegate, LFStreamSocketDelegate>
-{
-    dispatch_semaphore_t _lock;
-}
-///音频配置
+
+/// 音频配置
 @property (nonatomic, strong) LFLiveAudioConfiguration *audioConfiguration;
-///视频配置
+/// 视频配置
 @property (nonatomic, strong) LFLiveVideoConfiguration *videoConfiguration;
 /// 声音采集
 @property (nonatomic, strong) LFAudioCapture *audioCaptureSource;
@@ -37,22 +35,28 @@
 /// 上传
 @property (nonatomic, strong) id<LFStreamSocket> socket;
 
+
 #pragma mark -- 内部标识
-/// 上报
-@property (nonatomic, copy) dispatch_block_t reportBlock;
-/// debugInfo
+/// 调试信息
 @property (nonatomic, strong) LFLiveDebug *debugInfo;
-/// streamInfo
+/// 流信息
 @property (nonatomic, strong) LFLiveStreamInfo *streamInfo;
-/// uploading
+/// 是否开始上传
 @property (nonatomic, assign) BOOL uploading;
-/// state
+/// 当前状态
 @property (nonatomic, assign, readwrite) LFLiveState state;
+/// 当前直播type
+@property (nonatomic, assign, readwrite) LFLiveCaptureTypeMask captureType;
+
+/// 时间戳锁
+@property (nonatomic, strong) dispatch_semaphore_t lock;
 
 @end
 
 /**  时间戳 */
 #define NOW (CACurrentMediaTime()*1000)
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 @interface LFLiveSession ()
 
 @property (nonatomic, assign) uint64_t timestamp;
@@ -65,26 +69,35 @@
 
 #pragma mark -- LifeCycle
 - (instancetype)initWithAudioConfiguration:(LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(LFLiveVideoConfiguration *)videoConfiguration {
-    if (!audioConfiguration || !videoConfiguration) @throw [NSException exceptionWithName:@"LFLiveSession init error" reason:@"audioConfiguration or videoConfiguration is nil " userInfo:nil];
+    return [self initWithAudioConfiguration:audioConfiguration videoConfiguration:videoConfiguration captureType:LFLiveCaptureDefaultMask];
+}
+
+- (nullable instancetype)initWithAudioConfiguration:(nullable LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(nullable LFLiveVideoConfiguration *)videoConfiguration captureType:(LFLiveCaptureTypeMask)captureType{
+    if((captureType & LFLiveCaptureMaskAudio || captureType & LFLiveInputMaskAudio) && !audioConfiguration) @throw [NSException exceptionWithName:@"LFLiveSession init error" reason:@"audioConfiguration is nil " userInfo:nil];
+    if((captureType & LFLiveCaptureMaskVideo || captureType & LFLiveInputMaskVideo) && !videoConfiguration) @throw [NSException exceptionWithName:@"LFLiveSession init error" reason:@"videoConfiguration is nil " userInfo:nil];
     if (self = [super init]) {
         _audioConfiguration = audioConfiguration;
         _videoConfiguration = videoConfiguration;
-        _lock = dispatch_semaphore_create(1);
+        _adaptiveBitrate = NO;
+        _isFirstFrame = YES;
+        _captureType = captureType;
     }
     return self;
 }
 
 - (void)dealloc {
-    self.audioCaptureSource.running = NO;
     self.videoCaptureSource.running = NO;
+    self.audioCaptureSource.running = NO;
 }
 
 #pragma mark -- CustomMethod
 - (void)startLive:(LFLiveStreamInfo *)streamInfo {
     if (!streamInfo) return;
     _streamInfo = streamInfo;
+
     _streamInfo.videoConfiguration = _videoConfiguration;
     _streamInfo.audioConfiguration = _audioConfiguration;
+    _streamInfo.needDropFrame = (self.captureType & LFLiveCaptureMaskVideo || self.captureType & LFLiveInputMaskVideo) ? YES : NO;//< 有视频执行丢帧算法
     [self.socket start];
 }
 
@@ -94,12 +107,24 @@
     self.socket = nil;
 }
 
+- (void)pushVideo:(CVPixelBufferRef)pixelBuffer{
+    if(self.captureType & LFLiveInputMaskVideo){
+        if (self.uploading) [self.videoEncoder encodeVideoData:pixelBuffer timeStamp:self.currentTimestamp];
+    }
+}
+
+- (void)pushAudio:(AudioBufferList)audioBufferList{
+    if(self.captureType & LFLiveInputMaskAudio){
+        if (self.uploading) [self.audioEncoder encodeAudioData:audioBufferList timeStamp:self.currentTimestamp];
+    }
+}
+
 #pragma mark -- CaptureDelegate
 - (void)captureOutput:(nullable LFAudioCapture *)capture audioBuffer:(AudioBufferList)inBufferList {
     if (self.uploading) [self.audioEncoder encodeAudioData:inBufferList timeStamp:self.currentTimestamp];
 }
 
-- (void)captureOutput:(nullable LFVideoCapture *)capture pixelBuffer:(nullable CVImageBufferRef)pixelBuffer {
+- (void)captureOutput:(nullable LFVideoCapture *)capture pixelBuffer:(nullable CVPixelBufferRef)pixelBuffer {
     if (self.uploading) [self.videoEncoder encodeVideoData:pixelBuffer timeStamp:self.currentTimestamp];
 }
 
@@ -120,7 +145,7 @@
             self.isFirstFrame = YES;
             self.uploading = YES;
         }
-    }else if(status == LFLiveStop || status == LFLiveError){
+    } else if(status == LFLiveStop || status == LFLiveError){
         self.uploading = NO;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -151,16 +176,20 @@
 }
 
 - (void)socketBufferStatus:(nullable id<LFStreamSocket>)socket status:(LFLiveBuffferState)status {
-    NSUInteger videoBitRate = [_videoEncoder videoBitRate];
-    if (status == LFLiveBuffferDecline) {
-        if (videoBitRate < _videoConfiguration.videoMaxBitRate) {
-            videoBitRate = videoBitRate + 50 * 1000;
-            [_videoEncoder setVideoBitRate:videoBitRate];
-        }
-    } else {
-        if (videoBitRate > _videoConfiguration.videoMinBitRate) {
-            videoBitRate = videoBitRate - 100 * 1000;
-            [_videoEncoder setVideoBitRate:videoBitRate];
+    if((self.captureType & LFLiveCaptureMaskVideo || self.captureType & LFLiveInputMaskVideo) && self.adaptiveBitrate){
+        NSUInteger videoBitRate = [self.videoEncoder videoBitRate];
+        if (status == LFLiveBuffferDecline) {
+            if (videoBitRate < _videoConfiguration.videoMaxBitRate) {
+                videoBitRate = videoBitRate + 50 * 1000;
+                [self.videoEncoder setVideoBitRate:videoBitRate];
+                NSLog(@"Increase bitrate %@", @(videoBitRate));
+            }
+        } else {
+            if (videoBitRate > self.videoConfiguration.videoMinBitRate) {
+                videoBitRate = videoBitRate - 100 * 1000;
+                [self.videoEncoder setVideoBitRate:videoBitRate];
+                NSLog(@"Decline bitrate %@", @(videoBitRate));
+            }
         }
     }
 }
@@ -182,6 +211,7 @@
 }
 
 - (UIView *)preView {
+    self.videoCaptureSource.preView.transform = CGAffineTransformMakeRotation(M_PI_2);
     return self.videoCaptureSource.preView;
 }
 
@@ -273,29 +303,22 @@
     return self.videoCaptureSource.warterMarkView;
 }
 
-- (BOOL) preset {
-    return self.videoCaptureSource.preset;
-}
-
-- (void) setPreset:(BOOL)preset{
-    [self willChangeValueForKey:@"preset"];
-    [self.videoCaptureSource setPreset:preset];
-    [self didChangeValueForKey:@"preset"];
-
-}
-
 - (LFAudioCapture *)audioCaptureSource {
     if (!_audioCaptureSource) {
-        _audioCaptureSource = [[LFAudioCapture alloc] initWithAudioConfiguration:_audioConfiguration];
-        _audioCaptureSource.delegate = self;
+        if(self.captureType & LFLiveCaptureMaskAudio){
+            _audioCaptureSource = [[LFAudioCapture alloc] initWithAudioConfiguration:_audioConfiguration];
+            _audioCaptureSource.delegate = self;
+        }
     }
     return _audioCaptureSource;
 }
 
 - (LFVideoCapture *)videoCaptureSource {
     if (!_videoCaptureSource) {
-        _videoCaptureSource = [[LFVideoCapture alloc] initWithVideoConfiguration:_videoConfiguration];
-        _videoCaptureSource.delegate = self;
+        if(self.captureType & LFLiveCaptureMaskVideo){
+            _videoCaptureSource = [[LFVideoCapture alloc] initWithVideoConfiguration:_videoConfiguration];
+            _videoCaptureSource.delegate = self;
+        }
     }
     return _videoCaptureSource;
 }
@@ -315,7 +338,6 @@
         }else{
             _videoEncoder = [[LFHardwareVideoEncoder alloc] initWithVideoStreamConfiguration:_videoConfiguration];
         }
-        
         [_videoEncoder setDelegate:self];
     }
     return _videoEncoder;
@@ -323,7 +345,7 @@
 
 - (id<LFStreamSocket>)socket {
     if (!_socket) {
-        _socket = [[LFStreamRTMPSocket alloc] initWithStream:self.streamInfo videoSize:self.videoConfiguration.videoSize reconnectInterval:self.reconnectInterval reconnectCount:self.reconnectCount];
+        _socket = [[LFStreamRTMPSocket alloc] initWithStream:self.streamInfo reconnectInterval:self.reconnectInterval reconnectCount:self.reconnectCount];
         [_socket setDelegate:self];
     }
     return _socket;
@@ -336,17 +358,24 @@
     return _streamInfo;
 }
 
+- (dispatch_semaphore_t)lock{
+    if(!_lock){
+        _lock = dispatch_semaphore_create(1);
+    }
+    return _lock;
+}
+
 - (uint64_t)currentTimestamp {
-    dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(self.lock, DISPATCH_TIME_FOREVER);
     uint64_t currentts = 0;
-    if (_isFirstFrame == true) {
+    if (_isFirstFrame) {
         _timestamp = NOW;
-        _isFirstFrame = false;
+        _isFirstFrame = NO;
         currentts = 0;
     } else {
         currentts = NOW - _timestamp;
     }
-    dispatch_semaphore_signal(_lock);
+    dispatch_semaphore_signal(self.lock);
     return currentts;
 }
 

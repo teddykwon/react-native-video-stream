@@ -13,7 +13,7 @@
 @class LFVideoCapture;
 /** LFVideoCapture callback videoData */
 @protocol LFVideoCaptureDelegate <NSObject>
-- (void)captureOutput:(nullable LFVideoCapture *)capture pixelBuffer:(nullable CVImageBufferRef)pixelBuffer;
+- (void)captureOutput:(nullable LFVideoCapture *)capture pixelBuffer:(nullable CVPixelBufferRef)pixelBuffer;
 @end
 
 @interface LFVideoCapture : NSObject
@@ -58,9 +58,6 @@
 
 /*** The warterMarkView control whether the watermark is displayed or not ,if set ni,will remove watermark,otherwise add *.*/
 @property (nonatomic, strong) UIView *warterMarkView;
-
-/** The beautyFace control capture shader filter empty or beautiy */
-@property (nonatomic, assign) BOOL preset;
 
 #pragma mark - Initializer
 ///=============================================================================

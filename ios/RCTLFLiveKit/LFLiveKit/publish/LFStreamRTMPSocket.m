@@ -69,13 +69,17 @@ SAVC(mp4a);
 @implementation LFStreamRTMPSocket
 
 #pragma mark -- LFStreamSocket
-- (nullable instancetype)initWithStream:(nullable LFLiveStreamInfo *)stream videoSize:(CGSize)videoSize reconnectInterval:(NSInteger)reconnectInterval reconnectCount:(NSInteger)reconnectCount {
+- (nullable instancetype)initWithStream:(nullable LFLiveStreamInfo *)stream{
+    return [self initWithStream:stream reconnectInterval:0 reconnectCount:0];
+}
+
+- (nullable instancetype)initWithStream:(nullable LFLiveStreamInfo *)stream reconnectInterval:(NSInteger)reconnectInterval reconnectCount:(NSInteger)reconnectCount{
     if (!stream) @throw [NSException exceptionWithName:@"LFStreamRtmpSocket init error" reason:@"stream is nil" userInfo:nil];
     if (self = [super init]) {
         _stream = stream;
         if (reconnectInterval > 0) _reconnectInterval = reconnectInterval;
         else _reconnectInterval = RetryTimesMargin;
-
+        
         if (reconnectCount > 0) _reconnectCount = reconnectCount;
         else _reconnectCount = RetryTimesBreaken;
         
@@ -252,6 +256,7 @@ SAVC(mp4a);
     _rtmp->m_userData = (__bridge void *)self;
     _rtmp->m_msgCounter = 1;
     _rtmp->Link.timeout = RTMP_RECEIVE_TIMEOUT;
+    
     //设置可写，即发布流，这个函数必须在连接前使用，否则无效
     PILI_RTMP_EnableWrite(_rtmp);
 
@@ -533,6 +538,7 @@ void ConnectionTimeCallback(PILI_CONNECTION_TIME *conn_time, void *userData) {
     if (!_buffer) {
         _buffer = [[LFStreamingBuffer alloc] init];
         _buffer.delegate = self;
+        _buffer.needDropFrame = self.stream.needDropFrame;
     }
     return _buffer;
 }
