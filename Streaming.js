@@ -76,10 +76,6 @@ class Stream extends Component {
 					transform:[{rotate:'270deg'}],
 					width:height,
 					height:width
-					// width: height,
-					// height: width,
-					// top:height/3,
-					// left:-1 * (height/3)
 				};
 			}else{
 				style = {
