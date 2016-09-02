@@ -1,8 +1,11 @@
 /**
  * Created by buhe on 16/5/4.
  */
-import React, {PropTypes, Component} from 'react';
-import {requireNativeComponent, View} from 'react-native';
+import React, {Component, PropTypes} from 'react';
+import {
+    requireNativeComponent,
+    View
+} from 'react-native';
 
 class Player extends Component {
 
@@ -47,9 +50,9 @@ class Player extends Component {
     });
     return (
         <RCTPlayer
-            {...nativeProps}
-            />
-    )
+    {...nativeProps}
+  />
+  )
   }
 }
 
@@ -69,7 +72,7 @@ Player.propTypes = {
   onShutdown: PropTypes.func,
   onError: PropTypes.func,
   onPlaying: PropTypes.func,
-  ...View.propTypes,
+    ...View.propTypes,
 }
 
 const RCTPlayer = requireNativeComponent('RCTPlayer', Player);
