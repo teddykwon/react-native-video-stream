@@ -1,6 +1,6 @@
 {
   "name": "react-native-video-stream",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "react-native-pili based video stream library",
   "main": "index.js",
   "scripts": {
