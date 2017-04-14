@@ -6,7 +6,7 @@
 This library based [react-native-pili](https://github.com/buhe/react-native-pili)
 Add Stream based [LFLiveKit](https://github.com/LaiFengiOS/LFLiveKit/issues)
 
-Only Support iOS
+**Only Support iOS**
 
 ## Add it to your project
 
@@ -37,6 +37,8 @@ Run `npm install --save react-native-video-stream`
         onStop={() => {}} // streaming stop
         />
 ```
+# Updates
+- React-Native 0.40.0+ ( Thanks alex-mcleod )
 
 # License
 MIT

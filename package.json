@@ -1,7 +1,7 @@
 {
   "name": "react-native-video-stream",
-  "version": "0.0.3",
-  "description": "react-native-pili based video stream library",
+  "version": "0.0.4",
+  "description": "react-native-pili & LFLiveKit based video stream library",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/KwonOhBin/react-native-video-stream#readme",
   "devDependencies": {
-    "react": "^15.3.0",
-    "react-native": "^0.30.0"
+    "react": "~15.4.0",
+    "react-native": "~0.40.0"
   }
 }
