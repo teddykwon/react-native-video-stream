@@ -1,6 +1,6 @@
 {
   "name": "react-native-video-stream",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "react-native-pili & LFLiveKit based video stream library",
   "main": "index.js",
   "scripts": {
