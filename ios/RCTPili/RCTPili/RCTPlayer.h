@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RCTView.h"
+#import <React/RCTView.h>
 #import "PLPlayer.h"
 
 @class RCTEventDispatcher;

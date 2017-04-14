@@ -7,9 +7,9 @@
 //
 
 #import "RCTPlayer.h"
-#import "RCTBridgeModule.h"
-#import "RCTEventDispatcher.h"
-#import "UIView+React.h"
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventDispatcher.h>
+#import <React/UIView+React.h>
 
 @implementation RCTPlayer{
     RCTEventDispatcher *_eventDispatcher;
