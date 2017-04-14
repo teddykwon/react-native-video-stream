@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RCTBridge.h"
+#import <React/RCTBridge.h>
 #import "RCTStreamManager.h"
 //#import "LFLivePreview.h"
 #import "RCTStream.h"
