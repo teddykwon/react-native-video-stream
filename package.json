@@ -1,6 +1,6 @@
 {
   "name": "react-native-video-stream",
-  "version": "0.0.5",
+  "version": "0.0.4",
   "description": "react-native-pili & LFLiveKit based video stream library",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KwonOhBin/react-native-video-stream.git"
+    "url": "git+https://github.com/teddykwon/react-native-video-stream.git"
   },
   "keywords": [
     "react",
@@ -17,12 +17,12 @@
     "react-native-pili",
     "react-native-stream"
   ],
-  "author": "KwonOhBin",
+  "author": "TeddyKwon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KwonOhBin/react-native-video-stream/issues"
+    "url": "https://github.com/teddykwon/react-native-video-stream/issues"
   },
-  "homepage": "https://github.com/KwonOhBin/react-native-video-stream#readme",
+  "homepage": "https://github.com/teddykwon/react-native-video-stream#readme",
   "devDependencies": {
     "react": "~15.4.0",
     "react-native": "~0.40.0"

@@ -38,7 +38,7 @@ Run `npm install --save react-native-video-stream`
         />
 ```
 # Updates
-- React-Native 0.40.0+ ( Thanks alex-mcleod )
+- React-Native 0.40.0+ ( Thanks @alex-mcleod )
 
 # License
 MIT
