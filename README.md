@@ -22,6 +22,19 @@ Run `npm install --save react-native-video-stream`
 
 4. Linked Frameworks and Libraries add LFLiveKit.framework
 
+5. info.plist add 
+```
+  <key>NSCameraUsageDescription</key>
+  <string>cameraDesciption</string>
+  
+  <key>NSContactsUsageDescription</key>
+  <string>contactsDesciption</string>
+  
+  <key>NSMicrophoneUsageDescription</key>
+  <string>microphoneDesciption</string>
+```
+6. libRCTLFLiveKit.a add to Build phase
+
 ## Usage
 
 ```javascript
