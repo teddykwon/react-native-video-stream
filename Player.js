@@ -1,7 +1,8 @@
 /**
  * Created by buhe on 16/5/4.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {
     requireNativeComponent,
     View
