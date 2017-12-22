@@ -1,7 +1,8 @@
 /**
  * Created by buhe on 16/4/29.
  */
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {requireNativeComponent, Dimensions, NativeModules, View} from 'react-native';
 //
 // class Stream extends Component {
